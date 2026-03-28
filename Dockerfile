@@ -16,7 +16,7 @@ RUN dnf install -y dnf-plugins-core && \
 	dnf install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm -y && \
     dnf makecache
 
-RUN dnf install -y file cmake ninja-build git wget meson \
+RUN dnf install -y --nodocs tree file cmake ninja-build git wget meson \
     gcc-toolset-14 gcc-toolset-14-gcc gcc-toolset-14-gcc-c++ gcc-toolset-14-libstdc++-devel \
     libxcb-devel libxkbcommon-devel libxkbcommon-x11-devel xcb-util-devel xcb-util-image-devel \
     libX11-devel libXext-devel mesa-libGL-devel mesa-libGLU-devel xcb-util-keysyms-devel \
