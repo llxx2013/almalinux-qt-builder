@@ -23,8 +23,8 @@ RUN dnf install -y file cmake ninja-build git wget meson \
     libxcb-devel libxkbcommon-devel libxkbcommon-x11-devel xcb-util-devel xcb-util-image-devel \
     libX11-devel libXext-devel mesa-libGL-devel mesa-libGLU-devel xcb-util-keysyms-devel \
     fontconfig-devel freetype-devel libpng-devel libjpeg-turbo-devel xcb-util-renderutil-devel libXcursor-devel libXfixes-devel \
-    sqlite-devel libzstd-devel libicu-devel glib2-devel xcb-util-wm-devel libXrender-devel xcb-util-cursor-devel hunspell hunspell-*.noarch hunspell-devel \
-	systemd-devel libb2-devel libproxy-devel at-spi2-core-devel mtdev-devel tslib-devel gtk3-devel libinput-devel \
+    sqlite-devel libzstd-devel libicu-devel glib2-devel xcb-util-wm-devel libXrender-devel xcb-util-cursor-devel \
+	systemd-devel libb2-devel libproxy-devel at-spi2-core-devel gtk3-devel libinput-devel \
 	openssl3 openssl3-devel pcre2-devel harfbuzz-devel vulkan-headers mesa-libgbm-devel double-conversion-devel libwebp-devel libmng-devel glibc-langpack-en \
 	protobuf-devel clang-devel wayland-devel wayland-protocols-devel libgbm-devel libdrm-devel mesa-libEGL-devel mesa-libGLES-devel libffi-devel \
     flex flex-devel m4 \
@@ -56,7 +56,7 @@ COPY qt-everywhere-src-${QT_VERSION}.tar.xz /
 WORKDIR /Qt${QT_VERSION}
 RUN tar -xf /qt-everywhere-src-${QT_VERSION}.tar.xz --strip-components=1
 RUN . ${ENABLE_GCC_TOOLSET}&& \
-    ./configure -prefix ${QT_DIR} -release -nomake examples -nomake tests \
+    ./configure -prefix ${QT_DIR} -opensource -confirm-license -release -nomake examples -nomake tests \
     -skip qtwebengine,qtopcua,qtmultimedia,qtspeech -xcb -opengl desktop -openssl-runtime  \
     --verbose \
 	-- -DOPENSSL_INCLUDE_DIR=/usr/include/openssl3 \
