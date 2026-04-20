@@ -4,7 +4,7 @@ FROM almalinux:8 AS build0
 
 ARG QT_BUILD_NPROC=8
 
-ENV QT_VERSION=6.9.3
+ENV QT_VERSION=6.11.0
 ENV QT_VERSION_MAJOR=6
 ENV QT_DIR=/opt/Qt${QT_VERSION}
 ENV BISON_VERSION=3.8.2
@@ -57,9 +57,14 @@ WORKDIR /Qt${QT_VERSION}
 RUN tar -xf /qt-everywhere-src-${QT_VERSION}.tar.xz --strip-components=1
 RUN . ${ENABLE_GCC_TOOLSET}&& \
     ./configure -prefix ${QT_DIR} -opensource -confirm-license -release -nomake examples -nomake tests \
-    -skip qtwebengine,qtopcua,qtmultimedia,qtspeech -xcb -opengl desktop -openssl-runtime  \
+    -xcb -opengl desktop -openssl-runtime  \
     --verbose \
 	-- -DOPENSSL_INCLUDE_DIR=/usr/include/openssl3 \
+    -DBUILD_qtwebengine=OFF \
+    -DBUILD_qtopcua=OFF \
+    -DBUILD_qtmultimedia=OFF \
+    -DBUILD_qtspeech=OFF \
+    -DBUILD_qtopenapi=OFF \
     -DOPENSSL_CRYPTO_LIBRARY=/usr/lib64/openssl3/libcrypto.so  \
     -DOPENSSL_SSL_LIBRARY=/usr/lib64/openssl3/libssl.so \
     && cmake --build . --parallel ${QT_BUILD_NPROC} && cmake --install . 

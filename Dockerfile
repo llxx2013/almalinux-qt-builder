@@ -2,7 +2,7 @@ FROM almalinux:8
 
 ARG QT_BUILD_NPROC=8
 
-ENV QT_VERSION=6.9.3
+ENV QT_VERSION=6.11.0
 ENV QT_VERSION_MAJOR=6
 ENV QT_DIR=/opt/Qt${QT_VERSION}
 ENV BISON_VERSION=3.8.2
@@ -48,7 +48,7 @@ RUN wget https://ftp.gnu.org/gnu/bison/bison-${BISON_VERSION}.tar.gz \
     && tar -xzf bison-${BISON_VERSION}.tar.gz && rm -f bison-${BISON_VERSION}.tar.gz && cd bison-${BISON_VERSION} \
 	&& . ${ENABLE_GCC_TOOLSET} && ./configure && make -j$(nproc) && make install && cd .. && rm -rf bison-${BISON_VERSION}
 	
-ARG QT_BIN_URL="https://github.com/llxx2013/almalinux-qt693-builder/releases/download/v6.9.3/qt-6.9.3-almalinux8-x86_64.tar.xz"
+ARG QT_BIN_URL="https://github.com/llxx2013/almalinux-qt-builder/releases/download/${QT_VERSION}/qt-${QT_VERSION}-almalinux8-x86_64.tar.xz"
 
 RUN mkdir -p /opt && \
     wget -qO- ${QT_BIN_URL} | tar -xJ -C /opt
